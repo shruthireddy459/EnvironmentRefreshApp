@@ -1,10 +1,70 @@
 <div fxLayout="column">
   <div fxFlex="60px" class="topbar">
-    <h1>New Requests</h1>
-    <button pButton icon="fa-check" class="topbar-button" iconPos="left" type="button" label="Schedule Request" [routerLink]="['newrequest']"></button>
-  </div>
+        <h1>New Requests</h1>
+        <button pButton icon="fa-check" class="topbar-button" iconPos="left" type="button" label="Schedule Request" (click)="saveRequest()"></button>
+        <button pButton icon="fa-arrow-left" class="topbar-button" iconPos="left" type="button" label="Back to Results" (click)="backToResults()"></button>
+    </div>
 
-  <div fxFlex="grow" class="content-section">
-      <h2>New Request</h2>
-  </div>
+    <div fxFlex="grow" class="content-section">
+        <p-panel header="Create a New Request">
+            <div fxLayout="row">
+                <div fxLayout="column" fxFlex="33" class="form-box">
+                    <label for="environments">Environments*</label>
+                </div>
+                <div fxLayout="column" fxFlex="66" class="form-box">
+                    <p-dropdown id="environments" aria-placeholder="- Select -" aria-required="true" [options]="tempLookupEnvironments" required [(ngModel)]="refreshRequest.environment"></p-dropdown>
+                </div>
+            </div>
+            <div fxLayout="row">
+                <div fxLayout="column" fxFlex="33" class="form-box">
+                    <label for="Status">Status*</label>
+                </div>
+                <div fxLayout="column" fxFlex="66" class="form-box">
+                    <p-dropdown id="status" [options]="tempLookupStatus" [(ngModel)]="refreshRequest.status" placeholder="Select a Status"></p-dropdown>
+                </div>
+            </div>
+
+            <div fxLayout="row">
+                <div fxLayout="column" fxFlex="33" class="form-box">
+                    <label for="requestedBy">Requested By*</label>
+                </div>
+                <div fxLayout="column" fxFlex="66" class="form-box">
+                    <p-dropdown id="requestedBy" aria-required="true" [options]="tempLookupRequestUsers" [(ngModel)]="refreshRequest.requestor" placeholder="Request User"></p-dropdown>
+                </div>
+            </div>
+
+            <div fxLayout="row">
+                <div fxLayout="column" fxFlex="33" class="form-box">
+                    <label for="scheduledOn">Scheduled On*</label>
+                </div>
+                <div fxLayout="column" fxFlex="33" class="form-box">
+                    <input id="scheduledOn" aria-required="true" type="datetime-local" placeholder="eg. 2017-07-28" pInputText [(ngModel)]="refreshRequest.scheduleDate">
+                    <p>
+                        Note: Date and Time both required
+                    </p>
+                </div>
+            </div>
+
+            <div fxLayout="row">
+                <div fxLayout="column" fxFlex="33" class="form-box">
+                    <label for="database">Databases*</label>
+                </div>
+                <div fxLayout="column" fxFlex="66" class="form-box">
+                    <p-dropdown id="database" [options]="tempLookupDatabases" [(ngModel)]="databaseLog.databaseName" placeholder="Select a Database"></p-dropdown>
+                </div>
+            </div>
+
+            <div fxLayout="row">
+                <div fxLayout="column" fxFlex="33" class="form-box">
+                    <label for="completedOn">Completed On*</label>
+                </div>
+                <div fxLayout="column" fxFlex="33" class="form-box">
+                    <input id="completedOn" type="datetime-local" placeholder="eg. 2017-07-28" [(ngModel)]="refreshRequest.completionDate">
+                    <p>
+                        Note: Date and Time both required
+                    </p>
+                </div>
+            </div>
+        </p-panel>
+    </div>
 </div>
